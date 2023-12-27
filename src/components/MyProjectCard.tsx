@@ -1,5 +1,4 @@
-import React from "react";
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
+import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
 interface carddetail {
     title: string;
@@ -17,7 +16,7 @@ const MyProjectCard = (props: carddetail) => {
                 <small className="text-default-500">{props.date}</small>
             </CardHeader>
             <CardBody className="overflow-visible py-2">
-                <Image
+                <img
                     alt="Card background"
                     className="object-cover rounded-md"
                     src={"/assets/projects/" + props.title + ".png"}
