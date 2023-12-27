@@ -10,6 +10,10 @@ function AboutUs() {
                 <h1 className="font-semibold text-3xl">Krunal Bhadesiya</h1>
             </div>
             <Divider className="my-2" />
+            <Divider className="my-2" />
+            <Divider className="my-2" />
+            <Divider className="my-2" />
+            <Divider className="my-2" />
             <div>
                 <p className="text-justify">
                     This professional is equipped with a Bachelor&apos;s degree in Information Technology and boasts a robust technical skill set. Specializing in web development, they demonstrate mastery in HTML, CSS (including Bootstrap and Tailwind), JavaScript, and both JavaScript and TypeScript for React development. Their expertise extends to UI/UX design, showcasing proficiency in Figma, a leading design tool.
