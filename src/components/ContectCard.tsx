@@ -1,9 +1,9 @@
-import React from 'react'
+
 import { Button } from "@nextui-org/react";
 import { IconBrandGithub, IconBrandLinkedin, IconBrandX, IconMail, IconPhoneCall } from '@tabler/icons-react';
 
 function ContectCard() {
-    const iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0";
+    
     return (
         <div className='grid grid-cols-1 font-montserrat'>
             <div className='pt-2 md:pt-12 flex justify-center mb-3'>
