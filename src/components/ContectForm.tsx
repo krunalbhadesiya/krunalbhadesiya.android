@@ -1,9 +1,8 @@
-import { useState,useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Button, Card, CardBody, CardFooter, CardHeader, Input, Textarea, } from "@nextui-org/react";
 import { IconMailFilled, IconMailQuestion, IconNotes, IconUserFilled } from "@tabler/icons-react";
 
-
-const ContectForm = () => {
+function ContectForm() {
     const [value, setValue] = useState("a@gmail.com");
 
     const validateEmail = (value: any) => value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
@@ -19,10 +18,7 @@ const ContectForm = () => {
         email: "",
         subject: "",
         description: ""
-    })
-
-    // const [status, setStatus] = useState<null | string>(null);
-
+    });
     function handleChange(e: any): void {
         const username = e.target.name;
         const value = e.target.value;
@@ -30,44 +26,34 @@ const ContectForm = () => {
         setUser((prevUser: any) => ({ ...prevUser, [username]: value }));
     }
 
-    const handleSubmit = async (e:any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-
         try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { "Content_Type": "application/json" },
-                body: JSON.stringify({
-                    username: user.username,
-                    email: user.email,
-                    subject: user.subject,
-                    description: user.description
-                })
-            })
-            // Set the status based on the response from the API route
-            if (response.status === 200) {
-                setUser({
-                    username: "",
-                    email: "",
-                    subject: "",
-                    description: ""
-                })
-                // setStatus("success");
-            } else {
-                // setStatus("error");
-            }
+            const { username, email, subject, description } = user; // Destructure the values from the user state
+            const response = await fetch(
+                "https://v1.nocodeapi.com/krunalbhadesiya/google_sheets/hnqwnSsDOPXyLCUi?tabId=Sheet1",
+                {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify([
+                        [username, email, subject, description, new Date().toLocaleString()],
+                    ]),
+                }
+            );
+            await response.json();
+            setUser({ ...user, username: "", email: "", subject: "", description: "" });
 
-        } catch (e) {
-            console.log(e)
+        } catch (err) {
+            console.log(err);
         }
-
-    }
-
+    };
 
     return (
         <form onSubmit={handleSubmit}>
             <Card className="md:w-96 p-4 justify-self-center">
-                <CardHeader >
+                <CardHeader>
                     <h2 className="font-bold text-xl">Contect Form</h2>
                 </CardHeader>
                 <CardBody className="gap-2">
@@ -78,9 +64,7 @@ const ContectForm = () => {
                         variant="bordered"
                         placeholder="your name"
                         labelPlacement="outside"
-                        startContent={
-                            <IconUserFilled />
-                        }
+                        startContent={<IconUserFilled />}
                         classNames={{
                             base: "max-w-xs",
                             input: "resize-y min-h-[40px]",
@@ -89,8 +73,7 @@ const ContectForm = () => {
                         value={user.username}
                         onChange={handleChange}
                         autoComplete="off"
-                        isRequired
-                    />
+                        isRequired />
                     <Input
                         id='email'
                         type="email"
@@ -98,9 +81,7 @@ const ContectForm = () => {
                         variant="bordered"
                         placeholder="you@example.com"
                         labelPlacement="outside"
-                        startContent={
-                            < IconMailFilled />
-                        }
+                        startContent={<IconMailFilled />}
                         isInvalid={isInvalid}
                         color={isInvalid ? "danger" : "success"}
                         errorMessage={isInvalid && "Please enter a valid email"}
@@ -113,8 +94,7 @@ const ContectForm = () => {
                         value={user.email}
                         onChange={handleChange}
                         autoComplete="off"
-                        isRequired
-                    />
+                        isRequired />
                     <Input
                         id='subject'
                         type="subject"
@@ -122,9 +102,7 @@ const ContectForm = () => {
                         variant="bordered"
                         placeholder="subject"
                         labelPlacement="outside"
-                        startContent={
-                            <IconMailQuestion />
-                        }
+                        startContent={<IconMailQuestion />}
                         classNames={{
                             base: "max-w-xs",
                             input: "resize-y min-h-[40px]",
@@ -133,8 +111,7 @@ const ContectForm = () => {
                         value={user.subject}
                         onChange={handleChange}
                         autoComplete="off"
-                        isRequired
-                    />
+                        isRequired />
                     <Textarea
                         id='description'
                         label="Description"
@@ -143,9 +120,7 @@ const ContectForm = () => {
                         disableAnimation
                         disableAutosize
                         labelPlacement="outside"
-                        startContent={
-                            <IconNotes />
-                        }
+                        startContent={<IconNotes />}
                         classNames={{
                             base: "max-w-xs",
                             input: "resize-y min-h-[40px]",
@@ -154,17 +129,16 @@ const ContectForm = () => {
                         value={user.description}
                         onChange={handleChange}
                         autoComplete="off"
-                        isRequired
-                    />
+                        isRequired />
                 </CardBody>
-                <CardFooter >
+                <CardFooter>
                     <Button className="justify-self-center" variant="bordered" type="submit">
                         Submit
                     </Button>
                 </CardFooter>
             </Card>
         </form>
-    )
+    );
 }
 
 export default ContectForm
