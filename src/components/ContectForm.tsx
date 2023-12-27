@@ -1,16 +1,14 @@
-"use client"
-import React, { ChangeEvent, FormEvent } from 'react'
-import { useState } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Input, Textarea, Chip } from "@nextui-org/react";
+import { useState,useMemo } from 'react';
+import { Button, Card, CardBody, CardFooter, CardHeader, Input, Textarea, } from "@nextui-org/react";
 import { IconMailFilled, IconMailQuestion, IconNotes, IconUserFilled } from "@tabler/icons-react";
 
 
 const ContectForm = () => {
-    const [value, setValue] = React.useState("a@gmail.com");
+    const [value, setValue] = useState("a@gmail.com");
 
     const validateEmail = (value: any) => value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
 
-    const isInvalid = React.useMemo(() => {
+    const isInvalid = useMemo(() => {
         if (value === "") return false;
 
         return validateEmail(value) ? false : true;
@@ -23,7 +21,7 @@ const ContectForm = () => {
         description: ""
     })
 
-    const [status, setStatus] = useState<null | string>(null);
+    // const [status, setStatus] = useState<null | string>(null);
 
     function handleChange(e: any): void {
         const username = e.target.name;
@@ -54,9 +52,9 @@ const ContectForm = () => {
                     subject: "",
                     description: ""
                 })
-                setStatus("success");
+                // setStatus("success");
             } else {
-                setStatus("error");
+                // setStatus("error");
             }
 
         } catch (e) {
