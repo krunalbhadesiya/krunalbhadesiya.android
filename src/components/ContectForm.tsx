@@ -66,7 +66,7 @@ const ContectForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Card className="w-fit p-4 justify-self-center">
+            <Card className="md:w-96 p-4 justify-self-center">
                 <CardHeader >
                     <h2 className="font-bold text-xl">Contect Form</h2>
                 </CardHeader>
