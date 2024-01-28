@@ -57,21 +57,6 @@ function MyNavbar() {
                     </NavbarMenuItem>
                 ))}
             </NavbarMenu>
-            {/* <NavbarMenu>
-                {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
-                        <Link
-                            className="w-full"
-                            color={
-                                index === 2 ? "warning" : index === menuItems.length - 1 ? "danger" : "foreground"
-                            }
-                            to={"/" + item}
-                        >
-                            {item}
-                        </Link>
-                    </NavbarMenuItem>
-                ))}
-            </NavbarMenu> */}
         </Navbar>
     )
 }
