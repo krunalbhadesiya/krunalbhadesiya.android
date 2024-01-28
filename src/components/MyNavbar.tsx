@@ -4,7 +4,7 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, Navba
 
 function MyNavbar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const [selectedItem, setSelectedItem] = React.useState('');
+    const [selectedItem, setSelectedItem] = React.useState('Home');
     const menuItems = [
         { name: 'Home', path: '/' },
         { name: 'Projects', path: '/projects' },
