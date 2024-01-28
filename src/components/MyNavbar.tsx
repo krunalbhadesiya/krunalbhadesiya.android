@@ -4,18 +4,25 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, Navba
 
 function MyNavbar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [selectedItem, setSelectedItem] = React.useState('');
     const menuItems = [
         { name: 'Home', path: '/' },
         { name: 'Projects', path: '/projects' },
-        { name: 'ContectUs', path: '/contact-us' },
+        { name: 'ContactUs', path: '/contact-us' },
         { name: 'AboutUs', path: '/about-us' },
     ];
+
+    const handleItemClick = (name:any) => {
+        setSelectedItem(name);
+        setIsMenuOpen(false); // Close menu on mobile view
+    };
+
     return (
-        <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} >
+        <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
             <NavbarContent className="sm:hidden" justify="start">
                 <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
             </NavbarContent>
-            <Link to="/">
+            <Link to="/" onClick={() => setSelectedItem('')}>
                 <NavbarContent className="pr-3" justify="center" >
                     <NavbarBrand>
                         <img src="/profile.png" alt='logo' width={24} height={24} />
@@ -24,33 +31,25 @@ function MyNavbar() {
                 </NavbarContent>
             </Link>
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <NavbarItem >
-                    <Link to="/">
-                        Home
-                    </Link>
-                </NavbarItem>
-                <NavbarItem >
-                    <Link to="/projects">
-                        Projects
-                    </Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Link to="/contact-us">
-                        Contect Us
-                    </Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Link to="/about-us">
-                        About Us
-                    </Link>
-                </NavbarItem>
+                {menuItems.map((item) => (
+                    <NavbarItem key={item.name}>
+                        <Link
+                            to={item.path}
+                            className={selectedItem === item.name ? 'text-blue-500' : ''}
+                            onClick={() => handleItemClick(item.name)}
+                        >
+                            {item.name}
+                        </Link>
+                    </NavbarItem>
+                ))}
             </NavbarContent>
             <NavbarMenu>
                 {menuItems.map((item) => (
                     <NavbarMenuItem key={item.name}>
                         <Link
-                            className="w-full"
                             to={item.path}
+                            className={selectedItem === item.name ? 'text-blue-500' : ''}
+                            onClick={() => handleItemClick(item.name)}
                         >
                             {item.name}
                         </Link>
@@ -61,4 +60,4 @@ function MyNavbar() {
     )
 }
 
-export default MyNavbar
+export default MyNavbar;
